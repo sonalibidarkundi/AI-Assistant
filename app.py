@@ -6,14 +6,18 @@ from dotenv import load_dotenv
 import os
 import asyncio
 
+
 # Load environment variables
 load_dotenv()
+
 
 # Create Flask application
 app = Flask(__name__)
 
+
 # Enable CORS for frontend
 CORS(app)
+
 
 # -----------------------------
 # Environment variables
@@ -23,10 +27,10 @@ mongo_uri = os.getenv("MONGO_URI")
 groq_api_key = os.getenv("GROQ_API_KEY")
 
 if not mongo_uri:
-    raise RuntimeError("MONGO_URI is not set in .env")
+    raise RuntimeError("MONGO_URI is not set")
 
 if not groq_api_key:
-    raise RuntimeError("GROQ_API_KEY is not set in .env")
+    raise RuntimeError("GROQ_API_KEY is not set")
 
 
 # -----------------------------
@@ -86,8 +90,13 @@ def home():
 # -----------------------------
 # POST /ask
 # -----------------------------
+# Supports both:
+# Local:  /ask
+# Vercel: /api/ask
+# -----------------------------
 
 @app.route("/ask", methods=["POST"])
+@app.route("/api/ask", methods=["POST"])
 def ask_question():
 
     try:
@@ -95,8 +104,10 @@ def ask_question():
         # Get JSON request
         data = request.get_json(silent=True) or {}
 
+
         # Get user input
         user_input = data.get("userInput")
+
 
         # Validate input
         if not isinstance(user_input, str) or not user_input.strip():
@@ -105,14 +116,17 @@ def ask_question():
                 "error": "userInput is required and must be a non-empty string"
             }), 400
 
+
         # Get prompt from MongoDB
         prompt_template = get_prompt_template()
+
 
         # Replace {{userInput}} with actual question
         prompt = prompt_template.replace(
             "{{userInput}}",
             user_input
         )
+
 
         # Call Groq AI
         response = groq_client.chat.completions.create(
@@ -127,8 +141,10 @@ def ask_question():
             ]
         )
 
+
         # Get AI response
         ai_response = response.choices[0].message.content
+
 
         # Save history
         history_collection.insert_one({
@@ -139,12 +155,14 @@ def ask_question():
 
         })
 
+
         # Return response
         return jsonify({
 
             "response": ai_response
 
         })
+
 
     except ValueError as error:
 
@@ -153,6 +171,7 @@ def ask_question():
             "error": str(error)
 
         }), 404
+
 
     except Exception as error:
 
@@ -180,6 +199,7 @@ async def process_question(
         user_input
     )
 
+
     # Run synchronous Groq API call
     # inside a separate thread
     response = await asyncio.to_thread(
@@ -196,8 +216,10 @@ async def process_question(
         ]
     )
 
+
     # Get AI response
     ai_response = response.choices[0].message.content
+
 
     return {
 
@@ -225,9 +247,11 @@ async def process_multiple_questions(
 
     ]
 
+
     # Run all tasks concurrently
     # Results remain in input order
     results = await asyncio.gather(*tasks)
+
 
     return results
 
@@ -235,8 +259,13 @@ async def process_multiple_questions(
 # -----------------------------
 # POST /ask-multiple
 # -----------------------------
+# Supports both:
+# Local:  /ask-multiple
+# Vercel: /api/ask-multiple
+# -----------------------------
 
 @app.route("/ask-multiple", methods=["POST"])
+@app.route("/api/ask-multiple", methods=["POST"])
 def ask_multiple():
 
     try:
@@ -244,8 +273,10 @@ def ask_multiple():
         # Get JSON request
         data = request.get_json(silent=True) or {}
 
+
         # Get user inputs
         user_inputs = data.get("userInputs")
+
 
         # Validate list
         if not isinstance(user_inputs, list) or not user_inputs:
@@ -255,6 +286,7 @@ def ask_multiple():
                 "error": "userInputs must be a non-empty list"
 
             }), 400
+
 
         # Validate every question
         if any(
@@ -268,8 +300,10 @@ def ask_multiple():
 
             }), 400
 
+
         # Get prompt template from MongoDB
         prompt_template = get_prompt_template()
+
 
         # Process questions asynchronously
         results = asyncio.run(
@@ -284,8 +318,10 @@ def ask_multiple():
 
         )
 
+
         # Save all results to MongoDB
         history_collection.insert_many(results)
+
 
         # Return responses
         return jsonify({
@@ -300,6 +336,7 @@ def ask_multiple():
 
         })
 
+
     except ValueError as error:
 
         return jsonify({
@@ -307,6 +344,7 @@ def ask_multiple():
             "error": str(error)
 
         }), 404
+
 
     except Exception as error:
 
@@ -320,7 +358,7 @@ def ask_multiple():
 
 
 # -----------------------------
-# Run application
+# Run application locally
 # -----------------------------
 
 if __name__ == "__main__":
