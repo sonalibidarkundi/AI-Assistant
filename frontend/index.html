@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Intucate AI Assistant</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+        <header class="header">
+
+            <h1>AI Assistant</h1>
+
+            <p>
+                Ask educational questions and get AI-powered answers
+            </p>
+
+        </header>
+
+
+        <!-- Single Question Section -->
+        <section class="card">
+
+            <h2>Ask a Question</h2>
+
+            <p class="description">
+                Enter your question and get an AI-generated answer.
+            </p>
+
+            <textarea
+                id="singleQuestion"
+                placeholder="Example: What is Python?"
+                rows="5"></textarea>
+
+            <button
+                id="askButton"
+                onclick="askQuestion()">
+
+                Ask Question
+
+            </button>
+
+            <!-- Loading -->
+            <div
+                id="singleLoading"
+                class="loading hidden">
+
+                Getting answer...
+
+            </div>
+
+            <!-- Response -->
+            <div
+                id="singleResponse"
+                class="response hidden">
+
+                <h3>AI Response</h3>
+
+                <p id="singleAnswer"></p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Multiple Questions Section -->
+        <section class="card">
+
+            <h2>Ask Multiple Questions</h2>
+
+            <p class="description">
+                Enter multiple questions, one question per line.
+            </p>
+
+            <textarea
+                id="multipleQuestions"
+                placeholder="Example:
+What is Python?
+What is Flask?
+What is MongoDB?"
+                rows="7"></textarea>
+
+            <button
+                id="multipleButton"
+                onclick="askMultipleQuestions()">
+
+                Ask Multiple Questions
+
+            </button>
+
+            <!-- Loading -->
+            <div
+                id="multipleLoading"
+                class="loading hidden">
+
+                Processing questions...
+
+            </div>
+
+            <!-- Multiple Responses -->
+            <div
+                id="multipleResponse"
+                class="response hidden">
+
+                <h3>AI Responses</h3>
+
+                <div id="multipleAnswers"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Footer -->
+        <footer>
+
+            <p>
+                 AI Assistant
+            </p>
+
+            <p>
+                Flask • MongoDB • AI
+            </p>
+
+        </footer>
+
+    </div>
+
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>

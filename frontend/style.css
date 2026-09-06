@@ -1,0 +1,499 @@
+/* =========================================
+   INTUCATE AI ASSISTANT
+   Professional Frontend Design
+   ========================================= */
+
+
+/* =========================================
+   RESET
+   ========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   BODY
+   ========================================= */
+
+body {
+    font-family:
+        "Segoe UI",
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f5f7ff 0%,
+            #eef2ff 50%,
+            #f8fafc 100%
+        );
+
+    color: #1e293b;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   MAIN CONTAINER
+   ========================================= */
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    padding: 40px 20px;
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+.header {
+    text-align: center;
+
+    margin-bottom: 35px;
+}
+
+.header h1 {
+    font-size: 42px;
+
+    font-weight: 700;
+
+    letter-spacing: -1px;
+
+    color: #1e3a8a;
+
+    margin-bottom: 10px;
+}
+
+.header p {
+    font-size: 17px;
+
+    color: #64748b;
+
+    max-width: 650px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   CARD
+   ========================================= */
+
+.card {
+    background: rgba(255, 255, 255, 0.95);
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 18px;
+
+    padding: 30px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 10px 30px rgba(15, 23, 42, 0.08);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 15px 35px rgba(15, 23, 42, 0.11);
+}
+
+
+/* =========================================
+   CARD HEADING
+   ========================================= */
+
+.card h2 {
+    font-size: 24px;
+
+    color: #1e293b;
+
+    margin-bottom: 6px;
+}
+
+.description {
+    color: #64748b;
+
+    font-size: 14px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================================
+   TEXTAREA
+   ========================================= */
+
+textarea {
+    width: 100%;
+
+    min-height: 130px;
+
+    padding: 16px 18px;
+
+    border: 1.5px solid #cbd5e1;
+
+    border-radius: 12px;
+
+    background: #f8fafc;
+
+    color: #1e293b;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    resize: vertical;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+textarea::placeholder {
+    color: #94a3b8;
+}
+
+textarea:focus {
+    border-color: #6366f1;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 4px rgba(99, 102, 241, 0.12);
+}
+
+
+/* =========================================
+   BUTTON
+   ========================================= */
+
+button {
+    margin-top: 16px;
+
+    padding: 12px 24px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #6366f1
+        );
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
+}
+
+button:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 18px rgba(79, 70, 229, 0.28);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button:disabled {
+    cursor: not-allowed;
+
+    opacity: 0.6;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+/* =========================================
+   LOADING
+   ========================================= */
+
+.loading {
+    margin-top: 18px;
+
+    padding: 14px 16px;
+
+    border-radius: 10px;
+
+    background: #eef2ff;
+
+    color: #4338ca;
+
+    font-size: 14px;
+
+    font-weight: 500;
+}
+
+
+/* =========================================
+   HIDDEN CLASS
+   ========================================= */
+
+.hidden {
+    display: none;
+}
+
+
+/* =========================================
+   RESPONSE BOX
+   ========================================= */
+
+.response {
+    margin-top: 24px;
+
+    padding: 22px;
+
+    border-radius: 14px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+
+    animation:
+        fadeIn 0.35s ease;
+}
+
+.response h3 {
+    color: #334155;
+
+    font-size: 18px;
+
+    margin-bottom: 14px;
+
+    padding-bottom: 10px;
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+
+/* =========================================
+   SINGLE AI ANSWER
+   ========================================= */
+
+#singleAnswer {
+    color: #334155;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    white-space: pre-wrap;
+
+    overflow-wrap: break-word;
+}
+
+
+/* =========================================
+   MULTIPLE ANSWERS
+   ========================================= */
+
+.multiple-answer {
+    background: white;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 12px;
+
+    padding: 18px;
+
+    margin-bottom: 14px;
+
+    color: #334155;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    white-space: pre-wrap;
+
+    overflow-wrap: break-word;
+
+    box-shadow:
+        0 3px 10px rgba(15, 23, 42, 0.04);
+}
+
+.multiple-answer:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================
+   QUESTION NUMBER
+   ========================================= */
+
+.answer-title {
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #4f46e5;
+
+    margin-bottom: 8px;
+}
+
+
+/* =========================================
+   FOOTER
+   ========================================= */
+
+footer {
+    text-align: center;
+
+    margin-top: 35px;
+
+    padding: 20px 0;
+
+    color: #94a3b8;
+
+    font-size: 13px;
+}
+
+footer p:first-child {
+    font-weight: 600;
+
+    color: #64748b;
+
+    margin-bottom: 3px;
+}
+
+
+/* =========================================
+   ANIMATION
+   ========================================= */
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .container {
+        padding: 30px 16px;
+    }
+
+    .header h1 {
+        font-size: 34px;
+    }
+
+    .header p {
+        font-size: 15px;
+    }
+
+    .card {
+        padding: 24px;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 480px) {
+
+    .container {
+        padding: 20px 12px;
+    }
+
+    .header {
+        margin-bottom: 25px;
+    }
+
+    .header h1 {
+        font-size: 28px;
+    }
+
+    .header p {
+        font-size: 14px;
+    }
+
+    .card {
+        padding: 20px;
+
+        border-radius: 14px;
+    }
+
+    .card h2 {
+        font-size: 21px;
+    }
+
+    textarea {
+        font-size: 14px;
+
+        min-height: 115px;
+
+        padding: 13px;
+    }
+
+    button {
+        width: 100%;
+
+        padding: 13px;
+    }
+
+    .response {
+        padding: 16px;
+    }
+
+}
