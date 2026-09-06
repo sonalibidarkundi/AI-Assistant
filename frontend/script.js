@@ -4,8 +4,9 @@
 // =========================================
 
 
-// Flask backend URL
-const API_BASE_URL = "http://127.0.0.1:5000";
+// Vercel backend API URL
+// Frontend and backend are hosted on the same Vercel project
+const API_BASE_URL = "/api";
 
 
 // =========================================
@@ -55,7 +56,7 @@ async function askQuestion() {
 
     try {
 
-        // Send request to Flask
+        // Send request to Vercel API
         const response = await fetch(
             `${API_BASE_URL}/ask`,
             {
@@ -97,7 +98,7 @@ async function askQuestion() {
 
         alert(
             "Unable to get the answer. " +
-            "Please make sure the Flask backend is running."
+            "Please try again later."
         );
 
 
@@ -177,7 +178,7 @@ async function askMultipleQuestions() {
 
     try {
 
-        // Send request to Flask
+        // Send request to Vercel API
         const response = await fetch(
             `${API_BASE_URL}/ask-multiple`,
             {
@@ -265,7 +266,7 @@ async function askMultipleQuestions() {
 
         alert(
             "Unable to process the questions. " +
-            "Please make sure the Flask backend is running."
+            "Please try again later."
         );
 
 
